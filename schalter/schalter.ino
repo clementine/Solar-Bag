@@ -24,7 +24,8 @@
   int led = 1;
   int sense = 2;
   int source = 3;
-
+  boolean state = 0;
+  
 // the setup function runs once when you press reset or power the board
 void setup() {
   // initialize digital pin led as an output.
@@ -38,10 +39,15 @@ void loop() {
   digitalWrite(source, HIGH);   // turn the LED on (HIGH is the voltage level)
   if(digitalRead(sense) == 1) {
     // ON
-    digitalWrite(led, HIGH);    
+    if (state == 0) {
+      digitalWrite(led, HIGH);
+      state = 1;
+    } else {
+      digitalWrite(led, LOW);    
+      state = 0;  
+    }
   } else {
     // OFF
-    digitalWrite(led, LOW);    
   }
   
 //  delay(1000);                       // wait for a second
